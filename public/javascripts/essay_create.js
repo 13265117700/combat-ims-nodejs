@@ -13,7 +13,7 @@ const PAGE = {
     let content = $('#essayContent').val();
     let user_id = $('#userId').val();
     console.log(title,essay_id,content,user_id)
-    if(!title || !essay_id || !content){
+    if(!title || !essay_id || !user_id || !content){
       alert('请输入参数!')
       return
     }

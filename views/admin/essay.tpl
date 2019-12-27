@@ -10,6 +10,7 @@
         <th>index</th>
         <th>标题</th>
         <th>分类</th>
+        <th>发布人员</th>
         <th>设置</th>
         <th>操作</th>
       </tr>
@@ -18,6 +19,7 @@
         <td>{{val.id}}</td>
         <td class="description">{{val.title}}</td>
         <td>{{val.classify_name}}</td>
+        <td>{{val.user_name}}</td>
         <td><a href="/admin/essay/{{val.id}}/edit">编辑</a></td>
         <td><button id="essayDelete" data-index="{{val.id}}" class="delete">删除</button></td>
       </tr>

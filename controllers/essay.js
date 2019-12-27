@@ -1,5 +1,6 @@
 const essay = require('./../models/essay.js');
 const Classify = require('./../models/classify.js');
+const User = require('./../models/user.js');
 const {formatTime} = require('./../utils/date.js');
 
 const essayController = {
@@ -11,7 +12,10 @@ const essayController = {
       if (role == 2) {
         params.user_id = user_id
       }
-      const essays = await essay.all(params).leftJoin('classify','classify.id','essay.essay_id').select('essay.*',{'classify_name':'classify.name'});
+      const essays = await essay.all(params)
+      .leftJoin('classify','classify.id','essay.essay_id')
+      .leftJoin('user','user.id','essay.user_id')
+      .select('essay.*',{'classify_name':'classify.name'},{'user_name':'user.name'});
       res.locals.essays = essays.map(data=>{
         data.created_time_display = formatTime(data.created_time);
         return data
@@ -48,8 +52,12 @@ const essayController = {
       const essays = await essay.select({id});
       res.locals.essay = essays[0];
       const classify = await Classify.all();
-      console.log(classify)
       res.locals.classify = classify;
+      console.log(essays)
+      const users = await User.all();
+      res.locals.users = users.map(data=>{
+        return data
+      })
       res.render('admin/essay_edit.tpl', { title: '修改文章' })
     }catch(e){
       res.locals.error = e;
@@ -59,17 +67,18 @@ const essayController = {
   updated:async function(req,res,next){
     let title = req.body.title;
     let essay_id = req.body.essay_id;
+    let user_id = req.body.user_id;
     let content = req.body.content;
     let id = req.params.id;
     console.log(title,essay_id,content,id)
-    if(!title || !essay_id || !content){
+    if(!title || !essay_id || !user_id || !content){
       res.json({code:0,message:'缺少参数'});
       return
     }
 
     try{
       const essays = await essay.update(id,{
-        title,essay_id,content
+        title,essay_id,user_id,content
       });
       console.log(essays)
       res.json({code:200,data:essays})
@@ -94,8 +103,11 @@ const essayController = {
   renderEssayCreate:async function(req,res,next){
     try{
       const classify = await Classify.all();
-      console.log(classify)
+      const users = await User.all();
       res.locals.classify = classify;
+      res.locals.users = users.map(data=>{
+        return data
+      })
       res.render('admin/essay_create',{title:'新建文章'})
     }catch(e){
       res.locals.error = e;

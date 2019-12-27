@@ -12,6 +12,7 @@
     <div class="form-item">
       <!-- <p class="form-text">分类:</p> -->
       <select  id="essayId" class="form-input">
+        <option value="0">请选择分类</option>
         {% for item in classify %}
         <option value="{{ item.id }}" >{{ item.name }}</option>
         {% endfor %}
@@ -21,8 +22,9 @@
       <!-- <p class="form-text">管理员:</p> -->
       <select  id="userId" class="form-input">
         <option value="0">请选择管理员</option>
-        <option value="1"{% if user.role == 1 %} selected {% endif %}>用户管理员</option>
-        <option value="2"{% if user.role == 2 %} selected {% endif %}>文章管理员</option>
+        {% for val in users %}
+        <option value="{{ val.id }}" >{{ val.name }}</option>
+        {% endfor %}
       </select>
     </div>
     <div class="form-item">

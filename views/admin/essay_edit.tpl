@@ -10,20 +10,21 @@
     </div>
     <div class="form-item">
       <select  id="essayId" class="form-input">
+        <option value="0">请选择分类</option>
         {% for item in classify %}
-        <option value="{{ item.id }}" >{{ item.name }}</option>
+        <option value="{{ item.id }}" {% if item.id == essay.essay_id %} selected="selected" {% endif %}>{{ item.name }}</option>
         {% endfor %}
       </select>
     </div>
     <div class="form-item">
       <select  id="userId" class="form-input">
-        <option value="0">请选择管理员</option>
-        <option value="1"{% if user.role == 1 %} selected {% endif %}>用户管理员</option>
-        <option value="2"{% if user.role == 2 %} selected {% endif %}>文章管理员</option>
+        {% for val in users %}
+        <option value="{{ val.id }}" {% if val.id == essay.user_id %} selected="selected" {% endif %}>{{ val.name }}</option>
+        {% endfor %}
       </select>
     </div>
     <div class="form-item">
-      <textarea id="essayContent" class="form-textarea" placeholder="文章内容" onfocus="this.placeholder=''" onblur="this.placeholder='文章内容'"></textarea>
+      <textarea id="essayContent" class="form-textarea" placeholder="文章内容" onfocus="this.placeholder=''" onblur="this.placeholder='文章内容'">{{essay.content}}</textarea>
     </div>
     <div class="form-item">
       <button id="essaySubmit" class="form-button">保存</button>

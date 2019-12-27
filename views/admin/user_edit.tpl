@@ -17,8 +17,8 @@
     <div class="form-item">
       <select id="userRole" class="form-input">
         <option value="0">请选择角色</option>
-        <option value="1" {% if user.role == 1 %} eslected {% endif %}>用户管理员</option>
-        <option value="2" {% if user.role == 2 %} eslected {% endif %}>文章管理员</option>
+        <option value="1" {% if user.role == 1 %} selected="selected" {% endif %}>用户管理员</option>
+        <option value="2" {% if user.role == 2 %} selected="selected" {% endif %}>文章管理员</option>
       </select>
     </div>
     <div class="form-item">

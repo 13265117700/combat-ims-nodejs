@@ -114,6 +114,7 @@ html,body{
   font-family: monospace;
   color: #fff;
   font-weight: 600;
+  display: block;
 }
 .content-table{
   margin: 20px 50px 0 20px;

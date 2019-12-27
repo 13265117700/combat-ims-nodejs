@@ -9,18 +9,19 @@ const PAGE = {
   essaySubmit:function(){
     let title = $('#essayTitle').val();
     let essay_id = $('#essayId').val();
+    let user_id = $('#userId').val();
     let content = $('#essayContent').val();
     let id = $('#essayIndex').val();
     
     console.log(title,essay_id,content,id)
-    if(!title || !essay_id || !content){
+    if(!title || !essay_id || !user_id || !content){
       alert('请输入参数!')
       return
     }
 
     $.ajax({
       url:'/admin/essay/' + id + '/edit',
-      data:{title,essay_id,content,id},
+      data:{title,essay_id,user_id,content,id},
       type:'PUT',
       beforeSend: function() {
         $("#essaySubmit").attr("disabled",true);

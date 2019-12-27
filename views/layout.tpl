@@ -16,7 +16,6 @@
         <a href="/" class="header-logo">
           <img src="/images/mercedes_logo.jpg" alt="logo" class="logo">
         </a>
-        <button class="page-login"><a href="/admin/login">登录</a></button>
       </div>
     </header>
     <div class="page-body">
